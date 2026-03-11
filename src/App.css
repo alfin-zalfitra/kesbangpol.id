@@ -1,0 +1,5 @@
+/* Main App styles moved to index.css for better organization */
+.app {
+  min-height: 100vh;
+  width: 100%;
+}
