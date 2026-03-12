@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 
 const allEvents = [
     {
+        id: 1,
         date: '15',
         month: 'Mar',
         year: '2026',
@@ -14,6 +15,7 @@ const allEvents = [
         time: '09:00 - Selesai'
     },
     {
+        id: 2,
         date: '22',
         month: 'Mar',
         year: '2026',
@@ -22,6 +24,7 @@ const allEvents = [
         time: '13:00 - 16:00'
     },
     {
+        id: 3,
         date: '05',
         month: 'Apr',
         year: '2026',
@@ -30,6 +33,7 @@ const allEvents = [
         time: '08:30 - 12:00'
     },
     {
+        id: 4,
         date: '12',
         month: 'Apr',
         year: '2026',
@@ -38,6 +42,7 @@ const allEvents = [
         time: '09:00 - 15:00'
     },
     {
+        id: 5,
         date: '20',
         month: 'Apr',
         year: '2026',
@@ -46,6 +51,7 @@ const allEvents = [
         time: '14:00 - 17:00'
     },
     {
+        id: 6,
         date: '28',
         month: 'Apr',
         year: '2026',
@@ -131,33 +137,17 @@ const AllAgendaPage = () => {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <button className="btn" style={{
-                                        backgroundColor: '#0a2540',
-                                        color: 'white',
-                                        padding: '0.8rem 1.5rem',
-                                        borderRadius: '10px',
-                                        fontWeight: '700',
-                                        border: 'none',
-                                        cursor: 'pointer'
-                                    }}>
+                                <div style={{ marginTop: '1rem' }}>
+                                    <Link to={`/agenda-detail/${event.id}`} className="btn btn-primary">
                                         Lihat Detail
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
 
                     <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-                        <Link to="/" className="btn" style={{
-                            backgroundColor: 'white',
-                            color: '#0a2540',
-                            padding: '1rem 2rem',
-                            borderRadius: '12px',
-                            fontWeight: '700',
-                            border: '2px solid #0a2540',
-                            textDecoration: 'none'
-                        }}>
+                        <Link to="/" className="btn btn-outline">
                             ← Kembali ke Beranda
                         </Link>
                     </div>

@@ -4,6 +4,7 @@ import { useReveal } from '../hooks/useReveal';
 
 const events = [
     {
+        id: 1,
         date: '15',
         month: 'Mar',
         year: '2026',
@@ -12,6 +13,7 @@ const events = [
         time: '09:00 - Selesai'
     },
     {
+        id: 2,
         date: '22',
         month: 'Mar',
         year: '2026',
@@ -20,6 +22,7 @@ const events = [
         time: '13:00 - 16:00'
     },
     {
+        id: 3,
         date: '05',
         month: 'Apr',
         year: '2026',
@@ -76,7 +79,7 @@ const Agenda = () => {
                                     </span>
                                 </div>
                             </div>
-                            <button className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.85rem' }}>Detail</button>
+                            <Link to={`/agenda-detail/${event.id}`} className="btn btn-primary">Detail →</Link>
                         </div>
                     ))}
                 </div>

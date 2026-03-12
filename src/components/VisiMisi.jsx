@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useReveal } from '../hooks/useReveal';
 
 const VisiMisi = () => {
@@ -56,10 +57,10 @@ const VisiMisi = () => {
                     </div>
 
                     <div className={`animate-up ${revealed2 ? 'revealed' : ''} reveal-delay-4`} style={{ marginTop: '2.5rem' }}>
-                        <a href="/profil" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <Link to="/profil" className="btn btn-primary" style={{ gap: '0.75rem' }}>
                             Lihat Profil Lengkap
                             <span>→</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

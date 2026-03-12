@@ -88,15 +88,18 @@ const AllNewsPage = () => {
                     <div className="services-grid" ref={ref}>
                         {filteredNews.length > 0 ? (
                             filteredNews.map((item, index) => (
-                                <div
+                                <Link
                                     key={item.id || index}
+                                    to={`/berita-detail/${item.id}`}
                                     className={`news-card animate-up revealed`}
                                     style={{
                                         backgroundColor: 'white',
                                         borderRadius: '16px',
                                         overflow: 'hidden',
                                         boxShadow: 'var(--shadow)',
-                                        transition: 'transform 0.3s ease'
+                                        transition: 'transform 0.3s ease',
+                                        textDecoration: 'none',
+                                        display: 'block'
                                     }}
                                 >
                                     <div style={{ position: 'relative' }}>
@@ -123,7 +126,7 @@ const AllNewsPage = () => {
                                         <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', lineHeight: '1.4', marginBottom: '1.5rem', minHeight: '3.6rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                                             {item.title}
                                         </h3>
-                                        <a href="#" style={{
+                                        <div style={{
                                             display: 'inline-flex',
                                             alignItems: 'center',
                                             gap: '0.5rem',
@@ -132,9 +135,9 @@ const AllNewsPage = () => {
                                             textDecoration: 'none'
                                         }}>
                                             Baca Selengkapnya <span>→</span>
-                                        </a>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))
                         ) : (
                             <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '5rem 0' }}>
@@ -143,15 +146,7 @@ const AllNewsPage = () => {
                         )}
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-                        <Link to="/" className="btn" style={{
-                            backgroundColor: 'white',
-                            color: '#0a2540',
-                            padding: '1rem 2rem',
-                            borderRadius: '12px',
-                            fontWeight: '700',
-                            border: '2px solid #0a2540',
-                            textDecoration: 'none'
-                        }}>
+                        <Link to="/" className="btn btn-outline">
                             ← Kembali ke Beranda
                         </Link>
                     </div>

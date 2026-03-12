@@ -4,31 +4,37 @@ import { useReveal } from '../hooks/useReveal';
 
 const galleryItems = [
     {
+        id: 1,
         image: '/gallery1.png',
         title: 'Rapat Koordinasi Kesatuan Bangsa',
         category: 'Kegiatan'
     },
     {
+        id: 2,
         image: '/gallery2.png',
         title: 'Upacara Bendera HUT RI',
         category: 'Seremonial'
     },
     {
+        id: 3,
         image: '/gallery3.png',
         title: 'Sosialisasi Lapangan',
         category: 'Sosialisasi'
     },
     {
-        image: '/gallery1.png', // Reusing for variety in layout
+        id: 4,
+        image: '/gallery1.png',
         title: 'Pembinaan Ormas Daerah',
         category: 'Pembinaan'
     },
     {
+        id: 5,
         image: '/gallery2.png',
         title: 'Forum Kerukunan Umat Beragama',
         category: 'Dialog'
     },
     {
+        id: 6,
         image: '/gallery3.png',
         title: 'Monitoring Wilayah Strategis',
         category: 'Keamanan'
@@ -51,13 +57,20 @@ const Gallery = () => {
                     gap: '1.5rem'
                 }}>
                     {galleryItems.map((item, index) => (
-                        <div key={index} className={`gallery-item animate-up ${revealed ? 'revealed' : ''} reveal-delay-${(index % 4) + 1}`} style={{
-                            position: 'relative',
-                            borderRadius: '16px',
-                            overflow: 'hidden',
-                            height: '250px',
-                            cursor: 'pointer'
-                        }}>
+                        <Link
+                            key={index}
+                            to={`/galeri-detail/${item.id}`}
+                            className={`gallery-item animate-up ${revealed ? 'revealed' : ''} reveal-delay-${(index % 4) + 1}`}
+                            style={{
+                                position: 'relative',
+                                borderRadius: '16px',
+                                overflow: 'hidden',
+                                height: '350px',
+                                cursor: 'pointer',
+                                display: 'block',
+                                textDecoration: 'none'
+                            }}
+                        >
                             <img src={item.image} alt={item.title} style={{
                                 width: '100%',
                                 height: '100%',
@@ -69,11 +82,14 @@ const Gallery = () => {
                                 bottom: 0,
                                 left: 0,
                                 right: 0,
-                                background: 'linear-gradient(transparent, rgba(10, 37, 64, 0.9))',
+                                background: 'linear-gradient(transparent, rgba(10, 37, 64, 0.95))',
                                 padding: '1.5rem',
                                 color: 'white',
                                 transform: 'translateY(0)',
-                                transition: 'var(--transition)'
+                                transition: 'var(--transition)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'flex-end'
                             }}>
                                 <span style={{
                                     fontSize: '0.75rem',
@@ -82,24 +98,18 @@ const Gallery = () => {
                                     letterSpacing: '1px',
                                     color: 'var(--accent)'
                                 }}>{item.category}</span>
-                                <h3 style={{ fontSize: '1.1rem', marginTop: '0.25rem' }}>{item.title}</h3>
+                                <h3 style={{ fontSize: '1.1rem', marginTop: '0.25rem', marginBottom: '1rem' }}>{item.title}</h3>
+
+                                <div className="btn btn-primary" style={{ width: 'fit-content', padding: '0.6rem 1.2rem', fontSize: '0.85rem' }}>
+                                    Lihat Detail →
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
                 <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-                    <Link to="/galeri-lengkap" className={`btn animate-up ${revealed ? 'revealed' : ''}`} style={{
-                        backgroundColor: 'var(--primary)',
-                        color: 'white',
-                        padding: '1rem 2.5rem',
-                        borderRadius: '50px',
-                        fontWeight: '700',
-                        textDecoration: 'none',
-                        display: 'inline-block',
-                        boxShadow: '0 10px 20px rgba(10, 37, 64, 0.2)',
-                        transition: 'all 0.3s'
-                    }}>
+                    <Link to="/galeri-lengkap" className={`btn btn-primary animate-up ${revealed ? 'revealed' : ''}`}>
                         Lihat Semua Album →
                     </Link>
                 </div>

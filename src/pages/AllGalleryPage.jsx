@@ -5,18 +5,18 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const allGalleryItems = [
-    { image: '/gallery1.png', title: 'Rapat Koordinasi Kesatuan Bangsa', category: 'Kegiatan' },
-    { image: '/gallery2.png', title: 'Upacara Bendera HUT RI', category: 'Seremonial' },
-    { image: '/gallery3.png', title: 'Sosialisasi Lapangan', category: 'Sosialisasi' },
-    { image: '/gallery1.png', title: 'Pembinaan Ormas Daerah', category: 'Pembinaan' },
-    { image: '/gallery2.png', title: 'Forum Kerukunan Umat Beragama', category: 'Dialog' },
-    { image: '/gallery3.png', title: 'Monitoring Wilayah Strategis', category: 'Keamanan' },
-    { image: '/gallery1.png', title: 'Kunjungan Kerja Luar Daerah', category: 'Kegiatan' },
-    { image: '/gallery2.png', title: 'Pelatihan Kader Bela Negara', category: 'Pelatihan' },
-    { image: '/gallery3.png', title: 'Penyuluhan Anti Narkoba', category: 'Sosialisasi' },
-    { image: '/gallery1.png', title: 'Rapat Koordinasi Intelijen Daerah', category: 'Keamanan' },
-    { image: '/gallery2.png', title: 'Pawai Budaya Nusantara', category: 'Seremonial' },
-    { image: '/gallery3.png', title: 'Musyawarah Perencanaan Pembangunan', category: 'Kegiatan' },
+    { id: 1, image: '/gallery1.png', title: 'Rapat Koordinasi Kesatuan Bangsa', category: 'Kegiatan' },
+    { id: 2, image: '/gallery2.png', title: 'Upacara Bendera HUT RI', category: 'Seremonial' },
+    { id: 3, image: '/gallery3.png', title: 'Sosialisasi Lapangan', category: 'Sosialisasi' },
+    { id: 4, image: '/gallery1.png', title: 'Pembinaan Ormas Daerah', category: 'Pembinaan' },
+    { id: 5, image: '/gallery2.png', title: 'Forum Kerukunan Umat Beragama', category: 'Dialog' },
+    { id: 6, image: '/gallery3.png', title: 'Monitoring Wilayah Strategis', category: 'Keamanan' },
+    { id: 7, image: '/gallery1.png', title: 'Kunjungan Kerja Luar Daerah', category: 'Kegiatan' },
+    { id: 8, image: '/gallery2.png', title: 'Pelatihan Kader Bela Negara', category: 'Pelatihan' },
+    { id: 9, image: '/gallery3.png', title: 'Penyuluhan Anti Narkoba', category: 'Sosialisasi' },
+    { id: 10, image: '/gallery1.png', title: 'Rapat Koordinasi Intelijen Daerah', category: 'Keamanan' },
+    { id: 11, image: '/gallery2.png', title: 'Pawai Budaya Nusantara', category: 'Seremonial' },
+    { id: 12, image: '/gallery3.png', title: 'Musyawarah Perencanaan Pembangunan', category: 'Kegiatan' },
 ];
 
 const AllGalleryPage = () => {
@@ -54,15 +54,22 @@ const AllGalleryPage = () => {
                         marginTop: '2rem'
                     }}>
                         {allGalleryItems.map((item, index) => (
-                            <div key={index} style={{
-                                position: 'relative',
-                                borderRadius: '20px',
-                                overflow: 'hidden',
-                                height: '300px',
-                                cursor: 'pointer',
-                                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-                                transition: 'transform 0.3s ease'
-                            }} className="gallery-item-full">
+                            <Link
+                                key={index}
+                                to={`/galeri-detail/${item.id}`}
+                                style={{
+                                    position: 'relative',
+                                    borderRadius: '20px',
+                                    overflow: 'hidden',
+                                    height: '350px',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                                    transition: 'transform 0.3s ease',
+                                    display: 'block',
+                                    textDecoration: 'none'
+                                }}
+                                className="gallery-item-full"
+                            >
                                 <img src={item.image} alt={item.title} style={{
                                     width: '100%',
                                     height: '100%',
@@ -75,7 +82,10 @@ const AllGalleryPage = () => {
                                     right: 0,
                                     background: 'linear-gradient(transparent, rgba(10, 37, 64, 0.95))',
                                     padding: '2rem',
-                                    color: 'white'
+                                    color: 'white',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-end'
                                 }}>
                                     <span style={{
                                         fontSize: '0.8rem',
@@ -86,9 +96,12 @@ const AllGalleryPage = () => {
                                         display: 'block',
                                         marginBottom: '0.5rem'
                                     }}>{item.category}</span>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', margin: 0 }}>{item.title}</h3>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', margin: '0 0 1rem 0' }}>{item.title}</h3>
+                                    <div className="btn btn-primary" style={{ width: 'fit-content', padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
+                                        Lihat Detail →
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 

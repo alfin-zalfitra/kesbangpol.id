@@ -14,8 +14,11 @@ import Loader from './components/Loader';
 import LoginPage from './pages/LoginPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AllNewsPage from './pages/AllNewsPage';
+import NewsDetailPage from './pages/NewsDetailPage';
 import AllAgendaPage from './pages/AllAgendaPage';
+import AgendaDetailPage from './pages/AgendaDetailPage';
 import AllGalleryPage from './pages/AllGalleryPage';
+import GalleryDetailPage from './pages/GalleryDetailPage';
 import ProfilePage from './pages/ProfilePage';
 import KataSambutan from './pages/profil/KataSambutan';
 import VisiMisiPage from './pages/profil/VisiMisiPage';
@@ -75,8 +78,11 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/berita-lengkap" element={<AllNewsPage />} />
+          <Route path="/berita-detail/:id" element={<NewsDetailPage />} />
           <Route path="/agenda-lengkap" element={<AllAgendaPage />} />
+          <Route path="/agenda-detail/:id" element={<AgendaDetailPage />} />
           <Route path="/galeri-lengkap" element={<AllGalleryPage />} />
+          <Route path="/galeri-detail/:id" element={<GalleryDetailPage />} />
           <Route path="/profil" element={<ProfilePage />} />
           <Route path="/profil/sambutan" element={<KataSambutan />} />
           <Route path="/profil/visi-misi" element={<VisiMisiPage />} />

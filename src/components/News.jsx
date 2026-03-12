@@ -41,16 +41,21 @@ const News = () => {
                 {/* News Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
                     {newsItems.map((item, index) => (
-                        <div key={item.id || index} className={`animate-up ${revealed ? 'revealed' : ''} reveal-delay-${(index % 4) + 1}`} style={{
-                            backgroundColor: 'white',
-                            borderRadius: '24px',
-                            padding: '1.5rem',
-                            border: '1px solid #e0f2fe',
-                            boxShadow: '0 10px 20px rgba(0,0,0,0.02)',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            transition: 'var(--transition)'
-                        }}
+                        <Link
+                            key={item.id || index}
+                            to={`/berita-detail/${item.id}`}
+                            className={`animate-up ${revealed ? 'revealed' : ''} reveal-delay-${(index % 4) + 1}`}
+                            style={{
+                                backgroundColor: 'white',
+                                borderRadius: '24px',
+                                padding: '1.5rem',
+                                border: '1px solid #e0f2fe',
+                                boxShadow: '0 10px 20px rgba(0,0,0,0.02)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                transition: 'var(--transition)',
+                                textDecoration: 'none'
+                            }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-10px)';
                                 e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
@@ -63,19 +68,19 @@ const News = () => {
                             <div style={{ width: '100%', height: '220px', borderRadius: '18px', overflow: 'hidden', marginBottom: '1.5rem' }}>
                                 <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: '0.5s all' }} />
                             </div>
-                            <span style={{ color: '#3b82f6', fontSize: '0.75rem', fontWeight: '800', marginBottom: '0.8rem' }}>
+                            <span style={{ color: '#3b82f6', fontSize: '0.75rem', fontWeight: '800', marginBottom: '0.8rem', textTransform: 'uppercase' }}>
                                 {item.category || 'BERITA UTAMA'}
                             </span>
                             <h4 style={{ fontSize: '1.15rem', color: '#1e293b', fontWeight: '700', lineHeight: '1.4', marginBottom: '1.5rem', flex: 1 }}>
                                 {item.title}
                             </h4>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
-                                <a href="#" style={{ color: '#0ea5e9', textDecoration: 'none', fontWeight: '700', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                <div style={{ color: '#0ea5e9', fontWeight: '700', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                                     Baca Selengkapnya <span style={{ fontSize: '1rem' }}>→</span>
-                                </a>
+                                </div>
                                 <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{item.date}</span>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

@@ -50,7 +50,13 @@ const TopBar = () => {
                         const city = revData.address.city || revData.address.town || revData.address.village || 'Lokasi Terdeteksi';
                         fetchWeatherData(latitude, longitude, `${city}, ${revData.address.state || 'Sumatera Barat'}`);
                     } catch (e) {
-                        fetchWeatherData(latitude, longitude, `Koordinat: ${latitude.toFixed(2)}, ${longitude.toFixed(2)}`);
+                        try {
+                            const locRes = await fetch('https://ipapi.co/json/');
+                            const locData = await locRes.json();
+                            fetchWeatherData(latitude, longitude, `${locData.city || 'Padang'}, ${locData.region || 'Sumatera Barat'}`);
+                        } catch (e2) {
+                            fetchWeatherData(latitude, longitude, 'Pesisir Selatan, Sumatera Barat');
+                        }
                     }
                 }, async () => {
                     // Fallback to IP if geolocation is denied or fails
