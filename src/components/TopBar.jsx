@@ -41,42 +41,63 @@ const TopBar = () => {
         };
 
         const getFullLocation = async () => {
+            // Default location as fallback
+            const defaultLat = -1.3521;
+            const defaultLon = 100.5732;
+            const defaultLabel = 'Pesisir Selatan, Sumatera Barat';
+
+            const tryIpLocation = async () => {
+                try {
+                    // Using a more CORS-friendly service or a simpler fallback
+                    const locRes = await fetch('https://ipinfo.io/json?token='); // Use free tier or similar
+                    if (!locRes.ok) throw new Error('IP lookup failed');
+                    const locData = await locRes.json();
+                    const [lat, lon] = locData.loc.split(',');
+                    return { lat, lon, label: `${locData.city}, ${locData.region}` };
+                } catch (e) {
+                    try {
+                        const locRes2 = await fetch('https://api.db-ip.com/v2/free/self');
+                        const locData2 = await locRes2.json();
+                        return { lat: defaultLat, lon: defaultLon, label: `${locData2.city || 'Padang'}, ${locData2.stateProv || 'Sumatera Barat'}` };
+                    } catch (e2) {
+                        return { lat: defaultLat, lon: defaultLon, label: defaultLabel };
+                    }
+                }
+            };
+
             if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const { latitude, longitude } = position.coords;
-                    try {
-                        const revRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                        const revData = await revRes.json();
-                        const city = revData.address.city || revData.address.town || revData.address.village || 'Lokasi Terdeteksi';
-                        fetchWeatherData(latitude, longitude, `${city}, ${revData.address.state || 'Sumatera Barat'}`);
-                    } catch (e) {
-                        try {
-                            const locRes = await fetch('https://ipapi.co/json/');
-                            const locData = await locRes.json();
-                            fetchWeatherData(latitude, longitude, `${locData.city || 'Padang'}, ${locData.region || 'Sumatera Barat'}`);
-                        } catch (e2) {
-                            fetchWeatherData(latitude, longitude, 'Pesisir Selatan, Sumatera Barat');
-                        }
+                // Check if permission was already denied to avoid console spam
+                navigator.permissions && navigator.permissions.query({ name: 'geolocation' }).then(result => {
+                    if (result.state === 'denied') {
+                        tryIpLocation().then(loc => fetchWeatherData(loc.lat, loc.lon, loc.label));
+                        return;
                     }
-                }, async () => {
-                    // Fallback to IP if geolocation is denied or fails
-                    try {
-                        const locRes = await fetch('https://ipapi.co/json/');
-                        const locData = await locRes.json();
-                        fetchWeatherData(locData.latitude, locData.longitude, `${locData.city}, ${locData.region}`);
-                    } catch (e) {
-                        fetchWeatherData(-0.9471, 100.4172, 'Padang, Sumatera Barat');
-                    }
+                    
+                    navigator.geolocation.getCurrentPosition(
+                        async (position) => {
+                            const { latitude, longitude } = position.coords;
+                            try {
+                                const revRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                                const revData = await revRes.json();
+                                const city = revData.address.city || revData.address.town || revData.address.village || 'Lokasi Terdeteksi';
+                                fetchWeatherData(latitude, longitude, `${city}, ${revData.address.state || 'Sumatera Barat'}`);
+                            } catch (e) {
+                                fetchWeatherData(latitude, longitude, defaultLabel);
+                            }
+                        },
+                        async () => {
+                            const loc = await tryIpLocation();
+                            fetchWeatherData(loc.lat, loc.lon, loc.label);
+                        },
+                        { timeout: 5000 }
+                    );
+                }).catch(() => {
+                    // Fallback for browsers that don't support permissions.query
+                    tryIpLocation().then(loc => fetchWeatherData(loc.lat, loc.lon, loc.label));
                 });
             } else {
-                // Fallback to IP if geolocation is not supported
-                try {
-                    const locRes = await fetch('https://ipapi.co/json/');
-                    const locData = await locRes.json();
-                    fetchWeatherData(locData.latitude, locData.longitude, `${locData.city}, ${locData.region}`);
-                } catch (e) {
-                    fetchWeatherData(-0.9471, 100.4172, 'Padang, Sumatera Barat');
-                }
+                const loc = await tryIpLocation();
+                fetchWeatherData(loc.lat, loc.lon, loc.label);
             }
         };
 
@@ -96,26 +117,66 @@ const TopBar = () => {
 
     return (
         <div className="top-bar" style={{
-            background: '#071d33',
-            color: 'rgba(255, 255, 255, 0.8)',
-            fontSize: '0.8rem',
-            padding: '0.5rem 0',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+            background: 'var(--primary)',
+            color: 'rgba(255, 255, 255, 0.7)',
+            fontSize: '0.75rem',
+            padding: '0.6rem 0',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
             position: 'relative',
-            zIndex: 1001
+            zIndex: 1001,
+            fontWeight: '500'
         }}>
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '1.5rem' }}>
-                    <span>📅 {formatDate(time)}</span>
-                    <span>📍 {location}</span>
-                    <span>{weather.icon} {weather.temp}°C {weather.condition}</span>
+                <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <i className="far fa-calendar-alt" style={{ color: 'var(--secondary)' }}></i>
+                        <span>{formatDate(time)}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <i className="fas fa-map-marker-alt" style={{ color: 'var(--secondary)' }}></i>
+                        <span>{location}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <i className={`fas ${weather.condition.includes('Hujan') ? 'fa-cloud-showers-heavy' : weather.condition.includes('Awan') ? 'fa-cloud-sun' : 'fa-sun'}`} style={{ color: 'var(--secondary)' }}></i>
+                        <span>{weather.temp}°C {weather.condition}</span>
+                    </div>
                 </div>
-                <div style={{ display: 'flex', gap: '1.5rem' }}>
-                    <a href="#" style={{ color: 'white' }}>Email Dinas</a>
-                    <a href="/services/lapor" target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>Lapor!</a>
-                    <a href="/services/ppid-info" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontWeight: '700' }}>PPID</a>
+                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                    <a href="https://mail.sumbarprov.go.id" target="_blank" rel="noopener noreferrer" className="top-bar-link">
+                        <i className="far fa-envelope" style={{ marginRight: '0.4rem' }}></i> Email Dinas
+                    </a>
+                    <span style={{ width: '1px', height: '12px', background: 'rgba(255,255,255,0.1)' }}></span>
+                    <a href="https://www.lapor.go.id" target="_blank" rel="noopener noreferrer" className="top-bar-link">
+                        <i className="fas fa-bullhorn" style={{ marginRight: '0.4rem' }}></i> Lapor!
+                    </a>
+                    <span style={{ width: '1px', height: '12px', background: 'rgba(255,255,255,0.1)' }}></span>
+                    <a href="/ppid" className="top-bar-link ppid-highlight">
+                        <i className="fas fa-info-circle" style={{ marginRight: '0.4rem' }}></i> PPID
+                    </a>
                 </div>
             </div>
+            <style>{`
+                .top-bar-link {
+                    color: rgba(255, 255, 255, 0.8);
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                }
+                .top-bar-link:hover {
+                    color: white;
+                }
+                .ppid-highlight {
+                    color: var(--secondary) !important;
+                    font-weight: 700;
+                }
+                .ppid-highlight:hover {
+                    opacity: 0.8;
+                }
+                @media (max-width: 992px) {
+                    .top-bar { display: none; }
+                }
+            `}</style>
         </div>
     );
 };

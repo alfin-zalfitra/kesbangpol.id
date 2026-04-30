@@ -57,8 +57,8 @@ const VisiMisi = () => {
                     </div>
 
                     <div className={`animate-up ${revealed2 ? 'revealed' : ''} reveal-delay-4`} style={{ marginTop: '2.5rem' }}>
-                        <Link to="/profil" className="btn btn-primary" style={{ gap: '0.75rem' }}>
-                            Lihat Profil Lengkap
+                        <Link to="/kontak" className="btn btn-primary" style={{ gap: '0.75rem' }}>
+                            Lihat Profil & Kontak
                             <span>→</span>
                         </Link>
                     </div>

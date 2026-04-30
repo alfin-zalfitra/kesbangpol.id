@@ -13,24 +13,26 @@ import WhatsAppBot from './components/WhatsAppBot';
 import Loader from './components/Loader';
 import LoginPage from './pages/LoginPage';
 import AdminDashboard from './pages/AdminDashboard';
-import AllNewsPage from './pages/AllNewsPage';
-import NewsDetailPage from './pages/NewsDetailPage';
-import AllAgendaPage from './pages/AllAgendaPage';
-import AgendaDetailPage from './pages/AgendaDetailPage';
-import AllGalleryPage from './pages/AllGalleryPage';
-import GalleryDetailPage from './pages/GalleryDetailPage';
-import ProfilePage from './pages/ProfilePage';
-import KataSambutan from './pages/profil/KataSambutan';
-import VisiMisiPage from './pages/profil/VisiMisiPage';
-import Ideologi from './pages/profil/Ideologi';
-import Politik from './pages/profil/Politik';
-import Kewaspadaan from './pages/profil/Kewaspadaan';
-import Sekretariat from './pages/profil/Sekretariat';
-import TugasFungsi from './pages/profil/TugasFungsi';
-import DaftarPegawai from './pages/profil/DaftarPegawai';
-import StrukturOrganisasi from './pages/profil/StrukturOrganisasi';
+import CategoryPage from './pages/CategoryPage';
+import AnnouncementPage from './pages/AnnouncementPage';
+import MediaPage from './pages/MediaPage';
+import ContactPage from './pages/ContactPage';
+import PPIDPage from './pages/PPIDPage';
 import RedirectPage from './pages/RedirectPage';
+import NewsDetail from './pages/user/news/detail';
+import NewsIndex from './pages/user/news/index';
+import AgendaDetail from './pages/user/agenda/detail';
+import AgendaIndex from './pages/user/agenda/index';
+import GalleryDetail from './pages/user/gallery/detail';
+import GalleryIndex from './pages/user/gallery/index';
+import VideoDetail from './pages/user/video/detail';
+import VideoIndex from './pages/user/video/index';
+import PublicationIndex from './pages/user/publikasi/PublicationIndex';
+import PublicationDetail from './pages/user/publikasi/detail';
+import StaticPage from './pages/user/halamanStatis/StaticPage';
 import AccessibilityMenu from './components/AccessibilityMenu';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HomePage = () => (
   <>
@@ -38,11 +40,11 @@ const HomePage = () => (
     <Navbar />
     <Hero />
     <main>
+      <QuickAccess />
       <VisiMisi />
       <News />
       <Agenda />
       <Gallery />
-      <QuickAccess />
     </main>
     <Footer />
     <WhatsAppBot />
@@ -69,6 +71,14 @@ const ScrollToHash = () => {
 };
 
 function App() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-cubic',
+    });
+  }, []);
+
   return (
     <Router>
       <ScrollToHash />
@@ -77,22 +87,51 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/berita-lengkap" element={<AllNewsPage />} />
-          <Route path="/berita-detail/:id" element={<NewsDetailPage />} />
-          <Route path="/agenda-lengkap" element={<AllAgendaPage />} />
-          <Route path="/agenda-detail/:id" element={<AgendaDetailPage />} />
-          <Route path="/galeri-lengkap" element={<AllGalleryPage />} />
-          <Route path="/galeri-detail/:id" element={<GalleryDetailPage />} />
-          <Route path="/profil" element={<ProfilePage />} />
-          <Route path="/profil/sambutan" element={<KataSambutan />} />
-          <Route path="/profil/visi-misi" element={<VisiMisiPage />} />
-          <Route path="/profil/unit-kerja/ideologi" element={<Ideologi />} />
-          <Route path="/profil/unit-kerja/politik" element={<Politik />} />
-          <Route path="/profil/unit-kerja/kewaspadaan" element={<Kewaspadaan />} />
-          <Route path="/profil/unit-kerja/sekretariat" element={<Sekretariat />} />
-          <Route path="/profil/tugas-fungsi" element={<TugasFungsi />} />
-          <Route path="/profil/pegawai" element={<DaftarPegawai />} />
-          <Route path="/profil/struktur" element={<StrukturOrganisasi />} />
+          
+          {/* Static Pages from API */}
+          <Route path="/profil/visi-misi" element={<StaticPage slug="visi-misi" />} />
+          <Route path="/profil/tugas-fungsi" element={<StaticPage slug="tugas-dan-fungsi" />} />
+          <Route path="/profil/struktur" element={<StaticPage slug="struktur-organisasi" />} />
+          <Route path="/profil/lhkpn" element={<StaticPage slug="lhkpn" />} />
+          <Route path="/profil/sejarah" element={<StaticPage slug="sejarah-singkat" />} />
+          <Route path="/profil/pejabat" element={<StaticPage slug="profil-pejabat" />} />
+          <Route path="/ppid" element={<PPIDPage />} />
+          <Route path="/ppid/:sub" element={<PPIDPage />} />
+          <Route path="/ppid/:sub/:id" element={<PPIDPage />} />
+          <Route path="/kontak" element={<ContactPage />} />
+          
+          {/* Dynamic Category Pages */}
+          <Route path="/berita" element={<NewsIndex />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
+          
+          {/* News Detail */}
+          <Route path="/berita-detail/:slug" element={<NewsDetail />} />
+          <Route path="/berita-lengkap" element={<NewsIndex />} />
+
+          {/* Agenda */}
+          <Route path="/agenda" element={<AgendaIndex />} />
+          <Route path="/agenda-detail/:slug" element={<AgendaDetail />} />
+          <Route path="/agenda-lengkap" element={<AgendaIndex />} />
+
+          {/* Gallery */}
+          <Route path="/galeri" element={<GalleryIndex />} />
+          <Route path="/galeri-detail/:slug" element={<GalleryDetail />} />
+          <Route path="/galeri-lengkap" element={<GalleryIndex />} />
+
+          {/* Video */}
+          <Route path="/video" element={<VideoIndex />} />
+          <Route path="/video-detail/:slug" element={<VideoDetail />} />
+          
+          {/* Publication / Kategori Dinamis */}
+          <Route path="/publikasi/:category" element={<PublicationIndex />} />
+          <Route path="/publikasi-detail/:category/:slug" element={<PublicationDetail />} />
+          
+          {/* Special Pages */}
+          <Route path="/pengumuman" element={<AnnouncementPage />} />
+          <Route path="/media/video" element={<MediaPage type="video" />} />
+          <Route path="/kontak" element={<ContactPage />} />
+          
+          {/* Fallbacks */}
           <Route path="/services/:id" element={<RedirectPage />} />
         </Routes>
         <AccessibilityMenu />

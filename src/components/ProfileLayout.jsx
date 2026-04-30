@@ -4,12 +4,14 @@ import TopBar from './TopBar';
 import Footer from './Footer';
 import { useReveal } from '../hooks/useReveal';
 
-const ProfileLayout = ({ title, subtitle, children }) => {
+const ProfileLayout = ({ title, subtitle, children, theme = 'dark' }) => {
     const [headerRef, headerRevealed] = useReveal();
     const [contentRef, contentRevealed] = useReveal();
 
+    const isLight = theme === 'light';
+
     return (
-        <div style={{ background: 'var(--surface)', minHeight: '100vh' }}>
+        <div style={{ background: isLight ? '#f8fafc' : 'var(--surface)', minHeight: '100vh' }}>
             <TopBar />
             <Navbar />
 
@@ -18,21 +20,25 @@ const ProfileLayout = ({ title, subtitle, children }) => {
                 ref={headerRef}
                 className={`animate-up ${headerRevealed ? 'revealed' : ''}`}
                 style={{
-                    padding: '6rem 0 3rem',
-                    background: 'linear-gradient(135deg, var(--primary) 0%, #1a3a5c 100%)',
-                    color: 'white',
-                    textAlign: 'center'
+                    padding: '8rem 0 5rem',
+                    background: isLight ? '#ffffff' : 'linear-gradient(135deg, var(--primary) 0%, #1a3a5c 100%)',
+                    color: isLight ? 'var(--primary)' : 'white',
+                    textAlign: 'center',
+                    borderBottom: isLight ? '1px solid #e2e8f0' : 'none'
                 }}
             >
                 <div className="container">
                     <span style={{
-                        color: 'var(--accent)',
-                        fontWeight: '700',
+                        color: isLight ? 'var(--secondary)' : 'var(--accent)',
+                        fontWeight: '800',
                         textTransform: 'uppercase',
                         letterSpacing: '2px',
-                        fontSize: '0.875rem'
+                        fontSize: '0.875rem',
+                        display: 'block',
+                        marginBottom: '0.5rem'
                     }}>{subtitle}</span>
-                    <h1 style={{ fontSize: '3rem', marginTop: '0.5rem' }}>{title}</h1>
+                    <h1 style={{ fontSize: '3.5rem', fontWeight: '900', margin: 0 }}>{title}</h1>
+                    {isLight && <div style={{ width: '60px', height: '4px', background: 'var(--secondary)', margin: '1.5rem auto 0', borderRadius: '2px' }}></div>}
                 </div>
             </div>
 

@@ -3,65 +3,246 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer id="kontak">
-            <div className="container">
-                <div className="footer-grid">
-                    <div className="footer-brand">
-                        <h2 style={{ letterSpacing: '2px', fontWeight: '900' }}>KESBANGPOL</h2>
-                        <p>Badan Kesatuan Bangsa dan Politik berkomitmen memberikan pelayanan terbaik demi menjaga kedaulatan dan persatuan bangsa Indonesia.</p>
-                    </div>
+        <footer id="kontak" style={{
+            background: '#071d33',
+            color: 'white',
+            padding: '8rem 0 0',
+            position: 'relative',
+            marginTop: '0',
+            overflow: 'hidden'
+        }}>
+            {/* Perfectly Aligned Clean Wave Divider */}
+            <div style={{
+                position: 'absolute',
+                top: -1,
+                left: 0,
+                width: '100%',
+                lineHeight: 0,
+                zIndex: 1,
+                transform: 'rotate(180deg)'
+            }}>
+                <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: '100%', height: 'auto' }}>
+                    <path fill="#ffffff" d="M0,64L1440,32L1440,120L0,120Z"></path>
+                </svg>
+            </div>
 
-                    <div className="footer-links">
-                        <h3>Layanan IT</h3>
-                        <ul>
-                            <li><a href="#">E-Ormas</a></li>
-                            <li><a href="#">SIPA</a></li>
-                            <li><a href="/services/lapor" target="_blank" rel="noopener noreferrer">Pelaporan Online</a></li>
-                            <li><a href="#">Data Statistik</a></li>
-                        </ul>
-                    </div>
-                    <div className="footer-links" style={{ textAlign: 'center' }}>
-                        <h3>Kontak Kami</h3>
-                        <p style={{ fontSize: '0.95rem', opacity: '0.7', marginBottom: '1rem' }}>
-                            Jl. Kuini No.79A, Ujung Gurun, <br />
-                            Kec. Padang Barat, Kota Padang, <br />
-                            Sumatera Barat.
-                        </p>
-
-                        <p style={{ fontSize: '0.95rem', opacity: '0.7' }}>
-                            Email: kesbangpol.sumbar@gmail.com<br />
-                            Telp: (0751) 31554<br />
-                            WhatsApp: +62 811-6601-234
-                        </p>
-                        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem', justifyContent: 'center' }}>
-                            <a href="/services/fb-kesbangpol" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Facebook">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.325-.597 1.325-1.326V1.326C24 .597 23.403 0 22.675 0z" /></svg>
-                            </a>
-                            <a href="/services/ig-kesbangpol" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Instagram">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
-                            </a>
-                            <a href="/services/yt-kesbangpol" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="YouTube">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163c-.272-1.022-1.074-1.826-2.094-2.098C19.558 3.6 12 3.6 12 3.6s-7.558 0-9.404.465C1.576 4.337.774 5.141.502 6.163 0 8.01 0 11.875 0 11.875s0 3.865.502 5.712c.272 1.022 1.074 1.826 2.094 2.098 1.846.465 9.404.465 9.404.465s7.558 0 9.404-.465c1.02-.272 1.822-1.076 2.094-2.098.502-1.847.502-5.712.502-5.712s0-3.865-.502-5.712zM9.545 15.111V8.639L15.3 11.875l-5.755 3.236z" /></svg>
-                            </a>
+            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+                {/* Top Section: Brand & Contact */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: '4rem',
+                    marginBottom: '4rem',
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    paddingBottom: '4rem'
+                }}>
+                    <div className="footer-column">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                            <img src="/sumatrabarat.png" alt="Logo" style={{ width: '45px', height: 'auto' }} />
+                            <div style={{ borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '1.25rem' }}>
+                                <h2 style={{ fontSize: '1.2rem', fontWeight: '900', letterSpacing: '1px', margin: 0, color: 'white' }}>KESBANGPOL</h2>
+                                <p style={{ fontSize: '0.65rem', opacity: 0.5, textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>Sumatera Barat</p>
+                            </div>
                         </div>
-                        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-                            <Link to="/login" className="btn" style={{
-                                padding: '0.4rem 1rem',
-                                fontSize: '0.75rem',
-                                borderRadius: '6px',
-                                background: 'var(--secondary)',
-                                color: 'var(--white)',
-                                boxShadow: '0 4px 12px rgba(200, 16, 46, 0.3)'
-                            }}>
-                                Login Admin
-                            </Link>
+                        <p style={{ fontSize: '0.85rem', lineHeight: '1.8', opacity: 0.6, marginBottom: '2rem' }}>
+                            Mewujudkan stabilitas nasional yang kondusif di daerah melalui peningkatan kesadaran berbangsa dan bernegara bagi seluruh masyarakat.
+                        </p>
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                            <a href="#" className="soc-btn"><i className="fab fa-facebook-f"></i></a>
+                            <a href="#" className="soc-btn"><i className="fab fa-instagram"></i></a>
+                            <a href="#" className="soc-btn"><i className="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div className="footer-column">
+                        <h4 className="footer-title">Jam Layanan</h4>
+                        <div style={{ marginBottom: '1.5rem', fontSize: '0.85rem', opacity: 0.6, lineHeight: '1.6' }}>
+                            <div style={{ marginBottom: '0.5rem' }}>Senin - Kamis: <strong style={{ color: 'white', opacity: 0.9 }}>07:30 - 16:00</strong></div>
+                            <div>Jumat: <strong style={{ color: 'white', opacity: 0.9 }}>07:30 - 16:30</strong></div>
+                        </div>
+                        <h4 className="footer-title" style={{ marginTop: '2rem' }}>Kontak</h4>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                <i className="fas fa-phone-alt" style={{ color: 'var(--secondary)', fontSize: '0.8rem' }}></i>
+                                <span style={{ fontSize: '0.85rem', opacity: 0.6 }}>(0751) 31554</span>
+                            </div>
+                            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                <i className="fas fa-envelope" style={{ color: 'var(--secondary)', fontSize: '0.8rem' }}></i>
+                                <span style={{ fontSize: '0.85rem', opacity: 0.6 }}>kesbangpol@sumbarprov.go.id</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="footer-column">
+                        <h4 className="footer-title">Lokasi Kantor</h4>
+                        <div style={{ 
+                            borderRadius: '12px', 
+                            overflow: 'hidden', 
+                            height: '160px', 
+                            marginBottom: '1.5rem',
+                            border: '1px solid rgba(255,255,255,0.1)'
+                        }}>
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.2903957864132!2d100.35765537496512!3d-0.9320769990589093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b928a38f8a51%3A0x63bf4279bb2e30d5!2sBadan%20Kesatuan%20Bangsa%20dan%20Politik%20Provinsi%20Sumatera%20Barat!5e0!3m2!1sid!2sid!4v1777558593981!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="100%" 
+                                style={{ border: 0 }} 
+                                allowFullScreen="" 
+                                loading="lazy"
+                                title="Map Lokasi"
+                            ></iframe>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                            <i className="fas fa-map-marker-alt" style={{ color: 'var(--secondary)', fontSize: '0.85rem', marginTop: '4px' }}></i>
+                            <span style={{ fontSize: '0.8rem', opacity: 0.6, lineHeight: '1.5' }}>
+                                Jl. Kuini No.79A, Ujung Gurun, Kec. Padang Bar., Kota Padang, Sumatera Barat.
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div className="footer-bottom">
-                    &copy; {new Date().getFullYear()} DISKOMINFOTIK SUMBAR  . All rights reserved.
+
+                {/* Sitemap Section: Full Navbar Structure */}
+                <div style={{ marginBottom: '3rem' }}>
+                    <h4 className="footer-title">Sitemap</h4>
+                </div>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                    gap: '3rem',
+                    paddingBottom: '4rem'
+                }}>
+                    <div className="sitemap-col">
+                        <h4 className="sitemap-title">Profil</h4>
+                        <div className="sitemap-links">
+                            <Link to="/profil/visi-misi">Visi dan Misi</Link>
+                            <Link to="/profil/tugas-fungsi">Tugas dan Fungsi</Link>
+                            <Link to="/profil/struktur">Struktur Organisasi</Link>
+                            <Link to="/profil/lhkpn">LHKPN</Link>
+                            <Link to="/profil/sejarah">Sejarah Singkat</Link>
+                            <Link to="/profil/pejabat">Profil Pejabat</Link>
+                        </div>
+                    </div>
+
+                    <div className="sitemap-col">
+                        <h4 className="sitemap-title">Publikasi</h4>
+                        <div className="sitemap-links">
+                            <Link to="/publikasi/download">Unduh Data</Link>
+                            <Link to="/publikasi/infografis">Infografis</Link>
+                            <Link to="/publikasi/sop">SOP</Link>
+                            <Link to="/ppid">Informasi Publik (PPID)</Link>
+                        </div>
+                    </div>
+
+                    <div className="sitemap-col">
+                        <h4 className="sitemap-title">Perencanaan</h4>
+                        <div className="sitemap-links">
+                            <Link to="/publikasi/rencana-strategis">Rencana Strategis</Link>
+                            <Link to="/publikasi/rencana-kerja">Rencana Kerja</Link>
+                            <Link to="/publikasi/rencana-kinerja-tahunan">Rencana Tahunan</Link>
+                            <Link to="/publikasi/iku">IKU</Link>
+                        </div>
+                    </div>
+
+                    <div className="sitemap-col">
+                        <h4 className="sitemap-title">Kinerja</h4>
+                        <div className="sitemap-links">
+                            <Link to="/publikasi/laporan-kinerja-instansi-pemerintah">Laporan Kinerja</Link>
+                            <Link to="/publikasi/perjanjian-kinerja">Perjanjian Kinerja</Link>
+                            <Link to="/publikasi/renaksi-dan-realisasi-renaksi">Renaksi & Realisasi</Link>
+                            <Link to="/publikasi/skp">SKP</Link>
+                            <Link to="/publikasi/indikator-kinerja-individu">IKI</Link>
+                        </div>
+                    </div>
+
+                    <div className="sitemap-col">
+                        <h4 className="sitemap-title">Media</h4>
+                        <div className="sitemap-links">
+                            <Link to="/berita">Berita Terbaru</Link>
+                            <Link to="/galeri">Galeri Foto</Link>
+                            <Link to="/video">Galeri Video</Link>
+                            <Link to="/pengumuman">Pengumuman</Link>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            {/* Bottom Copyright Bar */}
+            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1.5rem 0' }}>
+                <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: 0.4 }}>
+                    <p style={{ fontSize: '0.7rem', margin: 0, letterSpacing: '1px' }}>
+                        &copy; {new Date().getFullYear()} KESBANGPOL SUMATERA BARAT. ALL RIGHTS RESERVED.
+                    </p>
+                    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.7rem' }}>Powered by Diskominfotik Sumbar</span>
+                        <Link to="/login" style={{ fontSize: '0.7rem', color: 'white', textDecoration: 'none' }}>Admin Login</Link>
+                    </div>
+                </div>
+            </div>
+
+            <style>{`
+                .footer-title {
+                    font-size: 0.85rem;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    color: white;
+                    margin-bottom: 1.5rem;
+                    position: relative;
+                    padding-bottom: 0.5rem;
+                    display: inline-block;
+                }
+                .footer-title::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 25px;
+                    height: 2px;
+                    background: var(--secondary);
+                }
+                .sitemap-title {
+                    font-size: 0.75rem;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                    color: var(--secondary);
+                    margin-bottom: 1.25rem;
+                }
+                .sitemap-links {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.75rem;
+                }
+                .sitemap-links a {
+                    color: rgba(255,255,255,0.4);
+                    text-decoration: none;
+                    font-size: 0.8rem;
+                    transition: all 0.3s ease;
+                }
+                .sitemap-links a:hover {
+                    color: white;
+                    padding-left: 5px;
+                }
+                .soc-btn {
+                    width: 36px;
+                    height: 36px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 50%;
+                    color: rgba(255,255,255,0.6);
+                    transition: all 0.3s ease;
+                }
+                .soc-btn:hover {
+                    background: var(--secondary);
+                    border-color: var(--secondary);
+                    color: white;
+                }
+                @media (max-width: 768px) {
+                    .footer-grid-v3, .sitemap-grid { grid-template-columns: 1fr !important; }
+                }
+            `}</style>
         </footer>
     );
 };

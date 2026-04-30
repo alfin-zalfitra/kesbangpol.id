@@ -37,27 +37,24 @@ const Navbar = () => {
             if (query.includes('visi') || query.includes('misi')) {
                 navigate('/profil/visi-misi');
             } else if (query.includes('berita') || query.includes('news')) {
-                navigate('/berita-lengkap');
-            } else if (query.includes('agenda')) {
-                navigate('/agenda-lengkap');
-            } else if (query.includes('galeri') || query.includes('foto')) {
-                navigate('/galeri-lengkap');
-            } else if (query.includes('sambutan')) {
-                navigate('/profil/sambutan');
-            } else if (query.includes('pegawai')) {
-                navigate('/profil/pegawai');
-            } else if (query.includes('struktur')) {
-                navigate('/profil/struktur');
+                navigate('/berita');
+            } else if (query.includes('pengumuman')) {
+                navigate('/pengumuman');
+            } else if (query.includes('foto') || query.includes('gambar')) {
+                navigate('/media/foto');
+            } else if (query.includes('video')) {
+                navigate('/media/video');
             } else if (query.includes('tugas') || query.includes('fungsi')) {
                 navigate('/profil/tugas-fungsi');
-            } else if (query.includes('unit') || query.includes('kerja')) {
-                navigate('/profil/unit-kerja');
+            } else if (query.includes('struktur')) {
+                navigate('/profil/struktur');
+            } else if (query.includes('kontak') || query.includes('alamat')) {
+                navigate('/kontak');
             } else if (query.includes('login') || query.includes('admin')) {
                 navigate('/login');
             } else if (query.includes('home') || query.includes('beranda')) {
                 navigate('/');
             } else {
-                // Default action: maybe go to home or show an alert
                 alert('Pencarian untuk: ' + query);
             }
             setSearchQuery('');
@@ -95,62 +92,87 @@ const Navbar = () => {
                 <ul className="nav-links">
                     <li><Link to="/" className="active">Beranda</Link></li>
                     <li className="dropdown">
-                        <Link to="/profil" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                            Profil <span style={{ fontSize: '0.7rem' }}>▼</span>
+                        <Link to="#" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                            Profil <span className="dropdown-arrow" style={{ fontSize: '0.7rem' }}>▼</span>
                         </Link>
                         <ul className="dropdown-menu">
-                            <li><Link to="/profil/sambutan">Kata Sambutan</Link></li>
                             <li><Link to="/profil/visi-misi">Visi dan Misi</Link></li>
-                            <li className="submenu">
-                                <Link to="/profil/unit-kerja" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    Unit Kerja <span>▶</span>
-                                </Link>
-                                <ul className="submenu-list">
-                                    <li><Link to="/profil/unit-kerja/ideologi">Ideologi, Wawasan Kebangsaan, Ketahanan Ekonomi Sosial Budaya dan Agama</Link></li>
-                                    <li><Link to="/profil/unit-kerja/politik">Politik Dalam Negeri dan Ormas</Link></li>
-                                    <li><Link to="/profil/unit-kerja/kewaspadaan">Kewaspadaan Nasional dan Penanganan Konflik</Link></li>
-                                    <li><Link to="/profil/unit-kerja/sekretariat">Sekretariat</Link></li>
-                                </ul>
-                            </li>
                             <li><Link to="/profil/tugas-fungsi">Tugas dan Fungsi</Link></li>
-                            <li><Link to="/profil/pegawai">Daftar Pegawai</Link></li>
                             <li><Link to="/profil/struktur">Struktur Organisasi</Link></li>
+                            <li><Link to="/profil/lhkpn">LHKPN</Link></li>
+                            <li><Link to="/profil/sejarah">Sejarah Singkat</Link></li>
+                            <li><Link to="/profil/pejabat">Profil Pejabat</Link></li>
                         </ul>
                     </li>
-                    <li><a href="/#berita">Berita</a></li>
-                    <li><a href="/#agenda">Agenda</a></li>
-                    <li><a href="/#galeri">Galeri</a></li>
-                    <li><a href="/#publik">Info Publik</a></li>
+                    <li className="dropdown">
+                        <Link to="/ppid" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                            PPID <span className="dropdown-arrow" style={{ fontSize: '0.7rem' }}>▼</span>
+                        </Link>
+                        <ul className="dropdown-menu">
+                            <li><Link to="/ppid">Daftar Informasi Publik (DIP)</Link></li>
+                            <li className="submenu">
+                                <Link to="#" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    Kategori Informasi <span style={{ fontSize: '0.6rem' }}>▶</span>
+                                </Link>
+                                <ul className="submenu-list">
+                                    <li><Link to="/ppid/category/3">Informasi Berkala</Link></li>
+                                    <li><Link to="/ppid/category/1">Informasi Serta Merta</Link></li>
+                                    <li><Link to="/ppid/category/2">Informasi Setiap Saat</Link></li>
+                                    <li><Link to="/ppid/category/6">Informasi Dikecualikan</Link></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li className="dropdown">
+                        <Link to="#" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                            Informasi <span className="dropdown-arrow" style={{ fontSize: '0.7rem' }}>▼</span>
+                        </Link>
+                        <ul className="dropdown-menu">
+                            <li><Link to="/publikasi/download">Unduh Data</Link></li>
+                            <li><Link to="/publikasi/infografis">Infografis</Link></li>
+                            <li><Link to="/publikasi/sop">SOP</Link></li>
+                        </ul>
+                    </li>
+
+                    <li className="dropdown">
+                        <Link to="#" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                            Perencanaan <span className="dropdown-arrow" style={{ fontSize: '0.7rem' }}>▼</span>
+                        </Link>
+                        <ul className="dropdown-menu">
+                            <li><Link to="/publikasi/rencana-strategis">Rencana Strategis</Link></li>
+                            <li><Link to="/publikasi/rencana-kerja">Rencana Kerja</Link></li>
+                            <li><Link to="/publikasi/rencana-kinerja-tahunan">Rencana Tahunan</Link></li>
+                            <li><Link to="/publikasi/iku">IKU</Link></li>
+                        </ul>
+                    </li>
+
+                    <li className="dropdown">
+                        <Link to="#" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                            Kinerja <span className="dropdown-arrow" style={{ fontSize: '0.7rem' }}>▼</span>
+                        </Link>
+                        <ul className="dropdown-menu">
+                            <li><Link to="/publikasi/laporan-kinerja-instansi-pemerintah">Laporan Kinerja</Link></li>
+                            <li><Link to="/publikasi/perjanjian-kinerja">Perjanjian Kinerja</Link></li>
+                            <li><Link to="/publikasi/renaksi-dan-realisasi-renaksi">Renaksi & Realisasi</Link></li>
+                            <li><Link to="/publikasi/skp">SKP</Link></li>
+                            <li><Link to="/publikasi/indikator-kinerja-individu">IKI</Link></li>
+                        </ul>
+                    </li>
+
+                    <li className="dropdown">
+                        <Link to="#" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                            Kategori <span className="dropdown-arrow" style={{ fontSize: '0.7rem' }}>▼</span>
+                        </Link>
+                        <ul className="dropdown-menu">
+                            <li><Link to="/berita">Berita</Link></li>
+                            <li><Link to="/galeri">Foto</Link></li>
+                            <li><Link to="/video">Video</Link></li>
+                            <li><Link to="/pengumuman">Pengumuman</Link></li>
+                        </ul>
+                    </li>
+
                 </ul>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div className="search-box" style={{
-                        background: 'var(--surface)',
-                        padding: '0.5rem 1rem',
-                        borderRadius: '20px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        border: '1px solid #e6e9f0',
-                        minWidth: '220px'
-                    }}>
-                        <span style={{ fontSize: '0.9rem' }}>🔍</span>
-                        <input
-                            type="text"
-                            placeholder={placeholders[placeholderIndex]}
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyDown={handleSearch}
-                            style={{
-                                border: 'none',
-                                background: 'transparent',
-                                marginLeft: '0.5rem',
-                                outline: 'none',
-                                fontSize: '0.85rem',
-                                width: '100%',
-                                transition: 'all 0.5s ease'
-                            }}
-                        />
-                    </div>
-                </div>
             </div>
         </nav>
     );
