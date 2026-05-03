@@ -1,6 +1,52 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { searchData } from '../data/searchData';
 
 const Hero = () => {
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [showResults, setShowResults] = useState(false);
+    const searchRef = useRef(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setShowResults(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const handleSearchChange = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+
+        if (query.length > 1) {
+            const filtered = searchData.filter(item =>
+                item.title.toLowerCase().includes(query.toLowerCase()) ||
+                item.category.toLowerCase().includes(query.toLowerCase())
+            ).slice(0, 5);
+            setSearchResults(filtered);
+            setShowResults(true);
+        } else {
+            setSearchResults([]);
+            setShowResults(false);
+        }
+    };
+
+    const handleResultClick = (item) => {
+        if (item.type === 'page') navigate(`/profil/${item.slug}`);
+        else if (item.type === 'news-index') navigate('/berita');
+        else if (item.type === 'ppid') navigate(item.sub ? `/ppid/${item.sub}` : '/ppid');
+        else if (item.type === 'contact') navigate('/kontak');
+        else if (item.type === 'announcement') navigate('/pengumuman');
+        
+        setSearchQuery('');
+        setShowResults(false);
+    };
+
     return (
         <section className="hero" id="home" style={{
             display: 'flex',
@@ -91,7 +137,7 @@ const Hero = () => {
                     maxWidth: '800px',
                     margin: '0 auto',
                     position: 'relative'
-                }}>
+                }} ref={searchRef}>
                     <div style={{
                         background: 'white',
                         padding: '0.5rem',
@@ -106,6 +152,9 @@ const Hero = () => {
                         <input 
                             type="text" 
                             placeholder="Cari informasi, berita, atau layanan publik..." 
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                            onFocus={() => searchQuery.length > 1 && setShowResults(true)}
                             style={{
                                 background: 'transparent',
                                 border: 'none',
@@ -116,20 +165,75 @@ const Hero = () => {
                                 outline: 'none'
                             }}
                         />
-                        <button style={{
-                            background: 'var(--primary)',
-                            color: 'white',
-                            border: 'none',
-                            padding: '1rem 2rem',
-                            borderRadius: '8px',
-                            fontWeight: '700',
-                            cursor: 'pointer',
-                            marginLeft: '0.5rem',
-                            transition: 'all 0.3s ease'
-                        }} className="hero-search-btn-std">
+                        <button 
+                            style={{
+                                background: 'var(--primary)',
+                                color: 'white',
+                                border: 'none',
+                                padding: '1rem 2rem',
+                                borderRadius: '8px',
+                                fontWeight: '700',
+                                cursor: 'pointer',
+                                marginLeft: '0.5rem',
+                                transition: 'all 0.3s ease'
+                            }} 
+                            className="hero-search-btn-std"
+                            onClick={() => searchQuery.trim() && navigate(`/search?q=${searchQuery}`)}
+                        >
                             CARI
                         </button>
                     </div>
+
+                    {showResults && searchResults.length > 0 && (
+                        <div className="search-results-kesbang" style={{
+                            position: 'absolute',
+                            top: 'calc(100% + 10px)',
+                            left: 0,
+                            width: '100%',
+                            background: 'white',
+                            borderRadius: '16px',
+                            padding: '10px',
+                            boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
+                            textAlign: 'left',
+                            zIndex: 100,
+                            maxHeight: '300px',
+                            overflowY: 'auto'
+                        }}>
+                            {searchResults.map((item, index) => (
+                                <div 
+                                    key={index}
+                                    onClick={() => handleResultClick(item)}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '15px',
+                                        padding: '12px 15px',
+                                        borderRadius: '10px',
+                                        cursor: 'pointer',
+                                        transition: 'background 0.2s'
+                                    }}
+                                    className="search-item-hover"
+                                >
+                                    <div style={{ 
+                                        width: '40px', 
+                                        height: '40px', 
+                                        background: '#f1f5f9', 
+                                        color: 'var(--primary)', 
+                                        borderRadius: '8px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <i className={item.category === 'Berita' ? 'fas fa-newspaper' : 'fas fa-link'}></i>
+                                    </div>
+                                    <div>
+                                        <div style={{ fontWeight: '700', color: '#1e293b', fontSize: '1rem' }}>{item.title}</div>
+                                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>{item.category}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

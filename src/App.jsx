@@ -18,6 +18,7 @@ import AnnouncementPage from './pages/AnnouncementPage';
 import MediaPage from './pages/MediaPage';
 import ContactPage from './pages/ContactPage';
 import PPIDPage from './pages/PPIDPage';
+import PPIDDetail from './pages/PPIDDetail';
 import RedirectPage from './pages/RedirectPage';
 import NewsDetail from './pages/user/news/detail';
 import NewsIndex from './pages/user/news/index';
@@ -30,6 +31,7 @@ import VideoIndex from './pages/user/video/index';
 import PublicationIndex from './pages/user/publikasi/PublicationIndex';
 import PublicationDetail from './pages/user/publikasi/detail';
 import StaticPage from './pages/user/halamanStatis/StaticPage';
+import SearchResultsPage from './pages/SearchResultsPage';
 import AccessibilityMenu from './components/AccessibilityMenu';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -98,6 +100,7 @@ function App() {
           <Route path="/ppid" element={<PPIDPage />} />
           <Route path="/ppid/:sub" element={<PPIDPage />} />
           <Route path="/ppid/:sub/:id" element={<PPIDPage />} />
+          <Route path="/ppid/detail/:id" element={<PPIDDetail />} />
           <Route path="/kontak" element={<ContactPage />} />
           
           {/* Dynamic Category Pages */}
@@ -132,6 +135,7 @@ function App() {
           <Route path="/kontak" element={<ContactPage />} />
           
           {/* Fallbacks */}
+          <Route path="/search" element={<SearchResultsPage />} />
           <Route path="/services/:id" element={<RedirectPage />} />
         </Routes>
         <AccessibilityMenu />
